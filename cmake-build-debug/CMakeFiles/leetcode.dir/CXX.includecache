@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/hok/CLionProjects/leetCode/main.cpp
+iostream
+-
+sstream
+-
+vector
+-
+cstdlib
+-
+map
+-
+cmath
+-
+iomanip
+-
+
