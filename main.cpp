@@ -322,25 +322,28 @@ string addBinary(string a, string b) {
     return sstr.str();
 }
 
-//leetcode strStr (incomplete)
+//leetcode strStr
 int strStr(string haystack, string needle) {
     int first = -1;
 
-    if(needle != "") {
-        for(int i = 0; i < haystack.size(); i++) {
-            if(haystack[i] == needle[0]) {
-                for(int j = 0; j < needle.size(); j++) {
-                    if(haystack[i+j] == needle[j]) {
-                        first = i;
-                        return first;
+    if(needle.size() <= haystack.size())
+        if(needle != "") {
+            for(int i = 0; i < haystack.size(); i++) {
+                if(haystack[i] == needle[0]) {
+                    for(int j = 0; j < needle.size(); j++) {
+                        if(haystack[i+j] == needle[j]) {
+                            if(j == needle.size() - 1) {
+                                return i;
+                            }
+                        }
+                        else
+                            break;
                     }
-                    continue;
                 }
             }
         }
-    }
-    else
-        first = 0;
+        else
+            first = 0;
 
     return first;
 }
