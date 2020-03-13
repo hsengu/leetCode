@@ -28,6 +28,7 @@ bool isHappy(int);
 bool isUgly(int);
 int nthUglyNumber(int);
 double myPow(double, int);
+bool validParentheses(string);
 
 int main() {
     //leetcode myPow
@@ -206,6 +207,17 @@ int main() {
     << longestCommonPrefix(vs4) << endl
     << longestCommonPrefix(vs5);
      */
+    
+    //leetCode validParentheses
+    /*
+    cout << isValid("(") << " Expected Result: False" << endl
+         << isValid(")") << " Expected Result: False" << endl
+         << isValid("()") << " Expected Result: True" << endl
+         << isValid("({})") << " Expected Result: True" << endl
+         << isValid("({)}") << " Expected Result: False" << endl
+         << isValid("(])") << " Expected Result: False" << endl
+         << isValid("{}") << " Expected Result: True" << endl;
+    */
 
     return 0;
 }
@@ -481,4 +493,51 @@ double myPow(double x, int n) {
             return x * temp * temp;
         else
             return temp * temp / x;
+}
+
+//leetcode validParentheses
+bool isValid(string s) {
+    bool valid = true;
+    vector<char> v;
+
+    if(!s.size())
+        valid = true;
+    else if(s.size() == 1)
+        valid = false;
+    else {
+        for (int i = 0; i < s.size(); i++) {
+            if(s[i] == '(' || s[i] == '[' || s[i] == '{') {
+                v.push_back(s[i]);
+                continue;
+            }
+
+            if(!v.size()) {
+                valid = false;
+                break;
+            }
+
+            switch(s[i]) {
+                case ')':
+                    if(v[v.size() - 1] != '(') {
+                        goto invalid;
+                    } else goto pop;
+                case ']':
+                    if(v[v.size() - 1] != '[') {
+                        goto invalid;
+                    } else goto pop;
+                case '}':
+                    if(v[v.size() - 1] != '{') {
+                        goto invalid;
+                    } else goto pop;
+                invalid:
+                    valid = false;
+                pop:
+                    v.pop_back();
+            }
+
+            if(!valid)
+                break;
+        }
+    }
+    return (valid && v.size() == 0) ? true : false;
 }
