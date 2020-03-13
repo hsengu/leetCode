@@ -28,7 +28,7 @@ bool isHappy(int);
 bool isUgly(int);
 int nthUglyNumber(int);
 double myPow(double, int);
-bool validParentheses(string);
+bool isValid(string);
 
 int main() {
     //leetcode myPow
@@ -208,7 +208,7 @@ int main() {
     << longestCommonPrefix(vs5);
      */
     
-    //leetCode validParentheses
+    //leetCode "validBrackets" isValid
     /*
     cout << isValid("(") << " Expected Result: False" << endl
          << isValid(")") << " Expected Result: False" << endl
@@ -495,7 +495,7 @@ double myPow(double x, int n) {
             return temp * temp / x;
 }
 
-//leetcode validParentheses
+//leetcode "validBrackets" isValid
 bool isValid(string s) {
     bool valid = true;
     vector<char> v;
