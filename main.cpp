@@ -29,6 +29,7 @@ bool isUgly(int);
 int nthUglyNumber(int);
 double myPow(double, int);
 bool isValid(string);
+int maxArea(vector<int>);
 
 int main() {
     //leetcode myPow
@@ -217,6 +218,19 @@ int main() {
          << isValid("({)}") << " Expected Result: False" << endl
          << isValid("(])") << " Expected Result: False" << endl
          << isValid("{}") << " Expected Result: True" << endl;
+    */
+    
+    //leetCode maxArea
+    /*
+    vector<int> v1 = {1,2,8,5,9,7,8,1};
+    vector<int> v2 = {1,2,3,4,5,6,7,8,9,10};
+    vector<int> v3 = {1,2,1};
+    vector<int> v4 = {1,2};
+
+    cout << maxArea(v1) << " Expected Result: 32" << endl
+         << maxArea(v2) << " Expected Result: 25" << endl
+         << maxArea(v3) << " Expected Result: 2" << endl
+         << maxArea(v1) << " Expected Result: 1" << endl;
     */
 
     return 0;
@@ -540,4 +554,21 @@ bool isValid(string s) {
         }
     }
     return (valid && v.size() == 0) ? true : false;
+}
+
+//leetcode maxArea
+int maxArea(vector<int> height) {
+    int start = 0, end = height.size() - 1, area = 0;
+
+    while(start != end) {
+        if(height[start] <= height[end]) {
+            area = (area < height[start] * (end - start)) ? height[start] * (end - start) : area;
+            start++;
+        }
+        else {
+            area = (area < height[end] * (end - start)) ? height[end] * (end - start) : area;
+            end--;
+        }
+    }
+    return area;
 }
