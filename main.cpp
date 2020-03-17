@@ -30,6 +30,7 @@ int nthUglyNumber(int);
 double myPow(double, int);
 bool isValid(string);
 int maxArea(vector<int>);
+string convert(string, int);
 
 int main() {
     //leetcode myPow
@@ -231,6 +232,14 @@ int main() {
          << maxArea(v2) << " Expected Result: 25" << endl
          << maxArea(v3) << " Expected Result: 2" << endl
          << maxArea(v1) << " Expected Result: 1" << endl;
+    */
+    
+    //leetCode "ZigZag Conversion" convert
+    /*
+    string s1 = "PAYPALISHIRING";
+
+    cout << convert(s1, 3) << " Expected Result: PAHNAPLSIIGYIR" << endl
+         << convert(s1, 4) << " Expected Result: PINALSIGYAHRPI" << endl;
     */
 
     return 0;
@@ -571,4 +580,29 @@ int maxArea(vector<int> height) {
         }
     }
     return area;
+}
+
+//leetcode "ZigZag Conversion" convert
+string convert(string s, int numRows) {
+    string str_ary[numRows];
+    int step = 0;
+    bool flip = false;
+    string result;
+
+    if(numRows <= 1)
+        result = s;
+    else {
+        for (char c : s) {
+            str_ary[step] += c;
+            if (step == 0 || step == numRows - 1)
+                flip = !flip;
+            step += flip ? 1 : -1;
+        }
+
+        for (string row : str_ary) {
+            result += row;
+        }
+    }
+
+    return result;
 }
