@@ -31,6 +31,9 @@ double myPow(double, int);
 bool isValid(string);
 int maxArea(vector<int>);
 string convert(string, int);
+ListNode* mergeTwoLists(ListNode*, ListNode*);
+vector<string> generateParenthesis(int);
+void generate(vector<string> &, string, int, int, int);
 
 int main() {
     //leetcode myPow
@@ -242,6 +245,44 @@ int main() {
          << convert(s1, 4) << " Expected Result: PINALSIGYAHRPI" << endl;
     */
 
+    //leetCode mergeTwoLists
+    /*
+    vector<int> vect1 = {1,2,4};
+    vector<int> vect2 = {1,3};
+    ListNode *h1 = new ListNode(0), *h2 = new ListNode(0), *curr = h1;
+    h1->val = vect1[0];
+    h2->val = vect2[0];
+
+    for(int i = 1; i < vect1.size(); i++) {
+        ListNode* temp = new ListNode(vect1[i]);
+        curr->next = temp;
+        curr = curr->next;
+    }
+
+    curr = h2;
+    for(int i = 1; i < vect2.size(); i++) {
+        ListNode* temp = new ListNode(vect2[i]);
+        curr->next = temp;
+        curr = curr->next;
+    }
+
+    ListNode* mergedList = mergeTwoLists(h1, h2);
+
+    while(mergedList) {
+        cout << mergedList->val << endl;
+        mergedList = mergedList->next;
+    }
+    */
+    
+    //leetCode generateParenthesis
+    /*
+    int x = 5;
+    vector<string> validParens = generateParenthesis(x);
+    for(string s : validParens) {
+        cout << s << endl;
+    }
+    */
+        
     return 0;
 }
 
@@ -605,4 +646,57 @@ string convert(string s, int numRows) {
     }
 
     return result;
+}
+
+//leetcode mergeTwoLists
+ListNode *mergeTwoLists(ListNode *l1, ListNode *l2) {
+    ListNode *head, *temp;
+
+    if(!l1)
+        head = l2;
+    else if(!l2)
+        head = l1;
+    else {
+        if(l1->val <= l2->val) {
+            temp = l1;
+            l1 = l1->next;
+        } else {
+            temp = l2;
+            l2 = l2->next;
+        }
+
+        head = temp;
+
+        while (l1 && l2) {
+            if (l1->val <= l2->val) {
+                temp->next = l1;
+                temp = l1;
+                l1 = l1->next;
+            } else {
+                temp->next = l2;
+                temp = l2;
+                l2 = l2->next;
+            }
+        }
+        if(!l1) temp->next = l2;
+        if(!l2) temp->next = l1;
+    }
+
+    return head;
+}
+
+//leetcode generateParenthesis
+vector<string> generateParenthesis(int n) {
+    vector<string> v;
+    generate(v, "", 0, 0, n);
+    return v;
+}
+
+void generate(vector<string> &v, string s, int open, int close, int n) {
+    if(s.size() == n * 2)
+        v.push_back(s);
+    if(open < n)
+        generate(v, s+"(", open+1, close, n);
+    if(close < open)
+        generate(v, s+")", open, close+1, n);
 }
