@@ -4,6 +4,7 @@ This is a rolling repo with my working and accepted [LeetCode](https://leetcode.
 
 ## Built with
 - C++
+- C
 
 ## Contributors
 - Hok S. Uy
